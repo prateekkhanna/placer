@@ -1,6 +1,6 @@
 // If a server side implementation is needed this can be used.
 var useProxy 	= false;
-
+var globalUserObject;
 var apiUrl    = "http://api.celeritytracking.com:80/v1/";
 var proxyUrl  = "proxy.php";
 var markers   = [];
@@ -51,7 +51,32 @@ $(document).ready(function(){
 	$('.all-devices').click(function(){
 		window.location.href = 'home.html';	
 	});
+	
+	var apiEnd = 'authenticate.json';
+	var url = apiUrl + apiEnd;
+	
+	$.ajax({
+		type: "POST",
+		url: url,
+		data: { username: 'shekhar', password: 'Group10', org: 'group10'},
+		
+		success:function(obj){
+			if(!obj.token){
+				alert("Incorrect username of password, please try again");
+			} else {
+				$.cookie("placertoken", obj.token);
+				getLoggedInUserInfo($.cookie("placertoken"))
+			}
+		},
+		
+		error:function(httpObj, textStatus){
+			if(httpObj.status != '200'){
+				alert("Todo: Appropriate error message");
+			}
+		}
+	});		
 });
+
 
 // Generic function to make API call to PLACER.
 function makeApiCall(method, path, data, callback) {
@@ -78,8 +103,9 @@ function makeApiCall(method, path, data, callback) {
 function getLoggedInUserInfo(token){
 	var data = {};
 	makeApiCall('GET', 'Member/getLoggedMemberInfo.json', data, function(obj) {
-		console.log(obj);
-		$.cookie("userObject", JSON.stringify(obj));
+		globalUserObject = obj;
+		loadScript('https://maps.googleapis.com/maps/api/js?key=AIzaSyDZtc5tWViKvQmXRdTFmtJx2oQYJSCH6Xc&sensor=false&libraries=geometry&callback=initialize');
+		initializeSpeedChart();
 	});
 }
 
@@ -330,7 +356,7 @@ function initializeSpeedChart() {
 			type: 'realtimeline',
 			renderAt: 'deviceSpeedChart',
 			width: "100%",
-			height: "120",
+			height: "220",
 			dataFormat: 'json',
 			dataSource: {
 				"chart": {
@@ -420,8 +446,11 @@ function liveClick(){
 }
 
 function getUserObject(){
-	if (JSON.parse($.cookie("userObject") == null)) getLoggedInUserInfo($.cookie("placertoken"));
-	return JSON.parse($.cookie("userObject"));
+	console.log("Token: " + $.cookie("placertoken"));
+//	if ($.cookie("userObject") == null) setTimeout(getLoggedInUserInfo($.cookie("placertoken")), 500);
+//	return JSON.parse($.cookie("userObject"));
+	if(!globalUserObject) getLoggedInUserInfo($.cookie("placertoken"));
+	return globalUserObject;
 }
 
 function clearRouteMarkers() {
@@ -579,7 +608,7 @@ function getDeviceRoute(tid, npk, timestamp, movingMarker, first){
 						bounds.extend(mLatlngStop);
 						map.panTo(mLatlng);
 						map.fitBounds(bounds);
-						if(map.getZoom() > 16) map.setZoom(17);
+						if(map.getZoom() > 14) map.setZoom(14);
 						console.log(map.getZoom());
 					}
 					

@@ -23,11 +23,11 @@
 	<body>
 		<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 			<ul class="nav navbar-nav navbar-device">
-				<li class="dropdown">
+				<li class="dropdown;height:100%">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">All Devices <span class="caret"></span></a>
-					<ul class="dropdown-menu" role="menu" style="min-width:600px;opacity:0.8;">
+					<ul class="dropdown-menu" role="menu" style="min-width:600px;opacity:0.9;">
 						<li style="background:black">
-							<div class="list-group live-feed">
+							<div class="list-group live-feed" style="overflow:auto;max-height:500px">
 								<a style="display: inline-block; width: 100%;" href="#" data-id="2" class="list-group-item all-devices id="live-2">
 									<h4 class="list-group-item-heading">All devices</h4>
 								</a>
@@ -51,11 +51,5 @@
 		<div class="full-screener normal">
 			<i class="fa fa-arrows-alt"></i>
 		</div>
-		<script>
-			$(document).ready(function(){
-				loadScript('https://maps.googleapis.com/maps/api/js?key=AIzaSyDZtc5tWViKvQmXRdTFmtJx2oQYJSCH6Xc&sensor=false&libraries=geometry&callback=initialize');
-				initializeSpeedChart();
-			});
-			</script>
 	</body>
 </html>

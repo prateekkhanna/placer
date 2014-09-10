@@ -1,6 +1,7 @@
 .dropdown-menu .live-feed a:hover{
 	background: #ccc !important;
 }
+
 .live-feed-overlay{
 	min-width:500px;
 	right:20;
@@ -37,7 +38,6 @@
 .map_container{
     position: relative;
 	height: 100%;
-    padding-bottom: 56.25%; 
 }
 .map_container .map_canvas{
     position: absolute;
@@ -97,12 +97,12 @@ body,h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 	/*margin-top:60px;*/
 }
 .live-feed{
-	font-size: 13px !important;
+	font-size: 11px !important;
 	font-weight: 500 !important;;
 	color: #888 !important;;
 }
 .live-feed h4{
-	font-size:18px !important;
+	font-size:14px !important;
 	font-weight: 500 !important;;
 	color: #000 !important;
 }
@@ -149,4 +149,7 @@ body{
 }
 .navbar-device button {
 	display: none !important;
+}
+.gm-style-iw div{
+	overflow: hidden !important;
 }
