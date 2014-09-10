@@ -1,0 +1,29 @@
+.forgot-password {
+	padding-top:8px;
+}
+
+body {
+	position: relative;
+	padding-top:150px;
+	background-color: #444;		
+}
+
+body:before {
+	content: "";
+	z-index:-1;
+	background: url("http://ptlogistics.biz/wp-content/themes/PTL/images/map_background_small.jpg") no-repeat center center fixed; 
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	position: absolute;
+	left:0;
+	top:0;
+	right:0;
+	bottom:0;
+	opacity:0.4;
+}
+
+html, body {
+	height:100%;
+}
