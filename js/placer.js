@@ -107,7 +107,7 @@ function getLoggedInUserInfo(token){
 	makeApiCall('GET', 'Member/getLoggedMemberInfo.json', data, function(obj) {
 		console.log(obj);
 		globalUserObject = obj;
-		loadScript('https://maps.googleapis.com/maps/api/js?key=AIzaSyDZtc5tWViKvQmXRdTFmtJx2oQYJSCH6Xc&sensor=false&libraries=geometry&callback=initialize');
+		initialize();
 		initializeSpeedChart();
 	});
 }
