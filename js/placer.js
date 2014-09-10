@@ -35,6 +35,7 @@ $(document).ready(function(){
 				if(!obj.token){
 					alert("Incorrect username of password, please try again");
 				} else {
+					
 					$.cookie("placertoken", obj.token);
 					window.location.href = 'home.html';	
 				}
@@ -64,6 +65,7 @@ $(document).ready(function(){
 			if(!obj.token){
 				alert("Incorrect username of password, please try again");
 			} else {
+				console.log(obj.token);
 				$.cookie("placertoken", obj.token);
 				getLoggedInUserInfo($.cookie("placertoken"))
 			}
@@ -103,6 +105,7 @@ function makeApiCall(method, path, data, callback) {
 function getLoggedInUserInfo(token){
 	var data = {};
 	makeApiCall('GET', 'Member/getLoggedMemberInfo.json', data, function(obj) {
+		console.log(obj);
 		globalUserObject = obj;
 		loadScript('https://maps.googleapis.com/maps/api/js?key=AIzaSyDZtc5tWViKvQmXRdTFmtJx2oQYJSCH6Xc&sensor=false&libraries=geometry&callback=initialize');
 		initializeSpeedChart();
